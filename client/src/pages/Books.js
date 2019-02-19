@@ -13,8 +13,8 @@ class Books extends Component {
     title: "",
     author: "",
     description: "",
-    image:"",
-    link:""
+    image: "",
+    link: ""
   };
 
   componentDidMount() {
@@ -24,7 +24,7 @@ class Books extends Component {
   loadBooks = () => {
     API.getBooks()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", description: "",image:"",link:"" })
+        this.setState({ books: res.data, title: "", author: "", description: "", image: "", link: "" })
       )
       .catch(err => console.log(err));
   };
@@ -49,42 +49,46 @@ class Books extends Component {
         title: this.state.title,
         author: this.state.author,
         description: this.state.description,
-        image:this.state.image,
-        link:this.state.link
+        image: this.state.image,
+        link: this.state.link
       })
         .then(res => this.loadBooks())
         .catch(err => console.log(err));
     }
   };
-  handleBookSearch = event =>{
+  handleBookSearch = event => {
     event.preventDefault();
   };
 
   render() {
     return (
       <Container fluid>
-      <Jumbotron>
-              <h1>(React) Google Books Search</h1>
-              <h2>Search for Save Books of Interest</h2>
-            </Jumbotron>
-        <Row>    
+        <Jumbotron>
+          <h1>(React) Google Books Search</h1>
+          <h2>Search for Save Books of Interest</h2>
+        </Jumbotron>
+        <Row>
           <Col size="md">
-          <form>
+            <form>
               <Input
                 value={this.state.title}
                 onChange={this.handleInputChange}
                 name="title"
-                placeholder="Title (required)"
+                placeholder="Book Name (required)"
               />
               <FormBtn
-                disabled={!(this.state.author && this.state.title)}
-                onClick={this.handleFormSubmit}
+                disabled={!(this.state.title)}
+                onClick={this.handleBookSearch}
               >
                 Search
               </FormBtn>
             </form>
-          </Col>    
-          
+          </Col>
+        </Row>
+        <Row>
+          <Col size="md">
+            Results
+          </Col>
         </Row>
       </Container>
     );
