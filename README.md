@@ -1,5 +1,5 @@
 
-# React-Fooglebook-APP
+# React-GoogleBook-APP
 ## Starting the app locally
 
 Start by installing front and backend dependencies. While in this directory, run the following command:
