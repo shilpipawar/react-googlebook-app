@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import DeleteBtn from "../components/DeleteBtn";
+import Card from "../components/Card";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import NewSearch from "../components/NewSearch";
+import SearchBooks from "../components/SearchBook";
 
 class Books extends Component {
   state = {
@@ -14,7 +17,9 @@ class Books extends Component {
     author: "",
     description: "",
     image: "",
-    link: ""
+    link: "",
+    showRemoveIcon: false,
+    searchValue: '',
   };
 
   componentDidMount() {
@@ -56,8 +61,40 @@ class Books extends Component {
         .catch(err => console.log(err));
     }
   };
-  handleBookSearch = event => {
-    event.preventDefault();
+  // Search Book on Goolge API////
+  
+  ////////////////////////////////
+  handleBookSearch = e => {
+    e.preventDefault();
+    let value = e.target.value;
+   
+
+    if (this._isMounted) {
+      this.setState({
+        searchValue: value,
+        [e.target.name]: e.target.value,
+      });
+    }
+
+    if (value === '') {
+      this.setState({
+        books: [],
+        showRemoveIcon: false,
+      });
+    } else {
+      this.setState({
+        showRemoveIcon: true,
+      });
+
+      NewSearch.search(value, (books) => {
+        this.setState({
+          books: books
+          //books: books.slice(0, MATCHING_ITEM_LIMIT),
+        });
+        console.log(books);
+      });
+     
+    }
   };
 
   render() {
@@ -78,16 +115,13 @@ class Books extends Component {
               />
               <FormBtn
                 disabled={!(this.state.title)}
+                value={this.state.searchValue}
                 onClick={this.handleBookSearch}
               >
                 Search
               </FormBtn>
             </form>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md">
-            Results
+            <SearchBooks></SearchBooks>
           </Col>
         </Row>
       </Container>
