@@ -8,7 +8,6 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import NewSearch from "../components/NewSearch";
-import SearchBooks from "../components/SearchBook";
 
 class Books extends Component {
   state = {
@@ -66,16 +65,14 @@ class Books extends Component {
   ////////////////////////////////
   handleBookSearch = e => {
     e.preventDefault();
-    let value = e.target.value;
-   
+    console.log(e.target.value);
 
-    if (this._isMounted) {
-      this.setState({
+    let value = e.target.value;
+    this.setState({
         searchValue: value,
         [e.target.name]: e.target.value,
       });
-    }
-
+    
     if (value === '') {
       this.setState({
         books: [],
@@ -93,7 +90,6 @@ class Books extends Component {
         });
         console.log(books);
       });
-     
     }
   };
 
@@ -108,20 +104,18 @@ class Books extends Component {
           <Col size="md">
             <form>
               <Input
-                value={this.state.title}
+                value={this.state.searchValue}
                 onChange={this.handleInputChange}
-                name="title"
+                name="searchValue"
                 placeholder="Book Name (required)"
               />
               <FormBtn
-                disabled={!(this.state.title)}
                 value={this.state.searchValue}
                 onClick={this.handleBookSearch}
               >
                 Search
               </FormBtn>
             </form>
-            <SearchBooks></SearchBooks>
           </Col>
         </Row>
       </Container>
