@@ -10,8 +10,8 @@
 * (get) - Will load your single HTML page in client/build/index.html. Make sure you have this after all other routes are defined.
 
 # GitHUb & Heroku link 
-Gethub [https://github.com/shilpipawar/react-googlebook-app] 
-Application deployed on heroku click here []
+Gethub [{https://github.com/shilpipawar/react-googlebook-app}] 
+Application deployed on heroku click here [https://boiling-sands-13236.herokuapp.com/]
 ## Starting the app locally
 
 Start by installing front and backend dependencies. While in this directory, run the following command:

@@ -28,7 +28,8 @@ function checkStatus(response) {
 
 function parseJSON(response) {
   const obj = response.json();
-  const arr = Object.keys(obj).map((key) => [key, obj[key]]);
+  //let jsonStr = JSON.stringify(obj);
+  let arr = Object.keys(obj).map((key) => [key, obj[key]]);
   console.log(obj);
   return arr;
 }

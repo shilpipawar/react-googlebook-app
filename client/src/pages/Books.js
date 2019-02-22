@@ -8,6 +8,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import NewSearch from "../components/NewSearch";
+import thumbnail from "../components/Thumbnail";
 
 class Books extends Component {
   state = {
@@ -61,7 +62,7 @@ class Books extends Component {
     }
   };
   // Search Book on Goolge API////
-  
+
   ////////////////////////////////
   handleBookSearch = e => {
     e.preventDefault();
@@ -69,10 +70,10 @@ class Books extends Component {
 
     let value = e.target.value;
     this.setState({
-        searchValue: value,
-        [e.target.name]: e.target.value,
-      });
-    
+      searchValue: value,
+      [e.target.name]: e.target.value,
+    });
+
     if (value === '') {
       this.setState({
         books: [],
@@ -85,10 +86,16 @@ class Books extends Component {
 
       NewSearch.search(value, (books) => {
         this.setState({
-          books: books
-          //books: books.slice(0, MATCHING_ITEM_LIMIT),
+          //books: books
+          books: books.slice(0, 20),
         });
-        console.log(books);
+        // for (let i = 0; i < 5; i++) {
+        //   const bookImage = books.items[i].volumeInfo.imageLinks.smallThumbnail;
+        //   const bookTitle = books.items[i].volumeInfo.title;
+        //   const bookAuthor = books.items[i].volumeInfo.authors;
+        //   const bookBuy = books.items[i].saleInfo.buyLink;
+        //   console.log(bookTitle + bookAuthor);
+        // }
       });
     }
   };
@@ -117,6 +124,25 @@ class Books extends Component {
               </FormBtn>
             </form>
           </Col>
+        </Row>
+        <Row>
+          {this.state.books.length ? (
+            <List>
+                  {this.state.books.map(book => {
+                    return (
+                      <ListItem
+                        key={book.title}
+                        title={book.title}
+                        href={book.link}
+                        ingredients={book.description}
+                        thumbnail={book.image}
+                      />
+                    );
+                  })}
+            </List>
+          ) : (
+              <h3>No Results to Display</h3>
+            )}
         </Row>
       </Container>
     );
