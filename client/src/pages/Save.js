@@ -56,8 +56,9 @@ class Save extends Component {
                       <ListItem
                         key={book.title}
                         title={book.title}
+                        author={book.author}
                         href={book.link}
-                        ingredients={book.description}
+                        description={book.description}
                         thumbnail={book.image}
                       />
                     );

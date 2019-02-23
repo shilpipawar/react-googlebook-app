@@ -84,10 +84,39 @@ class Search extends Component {
               ) : (
                   <h3>No Results to Display</h3>
                 )}
-
           </List>
-          {/* New Code */}
-          
+        </Row>
+        <Row>
+          <List>
+            {
+              this.state.result.totalItems ? (
+                <ListItem
+                  title={this.state.result.items[1].volumeInfo.title}
+                  auther={this.state.result.items[1].volumeInfo.authors}
+                  description = {this.state.result.items[1].volumeInfo.description}
+                  thumbnail = {this.state.result.items[1].volumeInfo.imageLinks.smallThumbnail}
+                  href = {this.state.result.items[1].volumeInfo.buyLink}
+                />
+              ) : (
+                  <h3>No Results to Display</h3>
+                )}
+          </List>
+        </Row>
+        <Row>
+          <List>
+            {
+              this.state.result.totalItems ? (
+                <ListItem
+                  title={this.state.result.items[2].volumeInfo.title}
+                  auther={this.state.result.items[2].volumeInfo.authors}
+                  description = {this.state.result.items[2].volumeInfo.description}
+                  thumbnail = {this.state.result.items[2].volumeInfo.imageLinks.smallThumbnail}
+                  href = {this.state.result.items[2].volumeInfo.buyLink}
+                />
+              ) : (
+                  <h3>No Results to Display</h3>
+                )}
+          </List>
         </Row>
       </Container>
     );
