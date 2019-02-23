@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
-import API from "../utils/API";
+import gAPI from "../utils/GoogleBookAPI";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
@@ -16,44 +16,33 @@ class Search extends Component {
     link: "",
     showRemoveIcon: false,
     searchValue: '',
+    result: {}
   };
 
   handleInputChange = event => {
-    const { name, value } = event.target;
+    const value = event.target.value;
+    const name = event.target.name;
     this.setState({
       [name]: value
     });
   };
 
-  // Search Book on Goolge API////
+  componentDidMount() {
+    this.searchBook("The Notebook");
+  }
 
-  ////////////////////////////////
-  handleBookSearch = e => {
-    e.preventDefault();
-    console.log(e.target.value);
+  searchBook = query => {
+    gAPI.search(query)
+      .then(res => this.setState({
+        result: res.data
+      }))
+      .catch(err => console.log(err));
+  };
 
-    let value = e.target.value;
-    this.setState({
-      searchValue: value,
-      [e.target.name]: e.target.value,
-    });
-
-    if (value === '') {
-      this.setState({
-        books: [],
-        showRemoveIcon: false,
-      });
-    } else {
-      this.setState({
-        showRemoveIcon: true,
-      });
-
-      NewSearch.search(value, (books) => {
-        this.setState({
-          books: books
-        });
-      });
-    }
+  handleBookSearch = event => {
+    event.preventDefault();
+    console.log("Enter Book Search..")
+    this.searchBook(this.state.searchValue);
   };
 
   render() {
@@ -82,23 +71,23 @@ class Search extends Component {
           </Col>
         </Row>
         <Row>
-          {this.state.books.length ? (
-            <List>
-                  {this.state.books.map(book => {
-                    return (
-                      <ListItem
-                        key={book.title}
-                        title={book.title}
-                        href={book.link}
-                        ingredients={book.description}
-                        thumbnail={book.image}
-                      />
-                    );
-                  })}
-            </List>
-          ) : (
-              <h3>No Results to Display</h3>
-            )}
+          <List>
+            {
+              this.state.result.totalItems ? (
+                <ListItem
+                  title={this.state.result.items[0].volumeInfo.title}
+                  auther={this.state.result.items[0].volumeInfo.authors}
+                  description = {this.state.result.items[0].volumeInfo.description}
+                  thumbnail = {this.state.result.items[0].volumeInfo.imageLinks.smallThumbnail}
+                  href = {this.state.result.items[0].volumeInfo.buyLink}
+                />
+              ) : (
+                  <h3>No Results to Display</h3>
+                )}
+
+          </List>
+          {/* New Code */}
+          
         </Row>
       </Container>
     );

@@ -24,7 +24,8 @@ export function Btn(props) {
 }
 export function ListItem({ thumbnail = "https://placehold.it/300x300",
   title,
-  ingredients,
+  auther,
+  description,
   href }) {
   return (
     <li className="list-group-item">
@@ -51,7 +52,8 @@ export function ListItem({ thumbnail = "https://placehold.it/300x300",
           </Col>
           <Col size="xs-8 sm-9">
             <h3>{title}</h3>
-            <p>Ingredients: {ingredients}</p>
+            <h3>Auther:{auther}</h3>
+            <p>description: {description}</p>
             <a rel="noreferrer noopener" target="_blank" href={href}>
               Go to Book Link!
             </a>
