@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import NewSearch from "../components/NewSearch";
-import Button from "../components/Button";
 
 class Books extends Component {
   state = {
@@ -84,8 +82,7 @@ class Books extends Component {
 
       NewSearch.search(value, (books) => {
         this.setState({
-          //books: books
-          books: books.slice(0, 20),
+          books: books
         });
         // for (let i = 0; i < 5; i++) {
         //   const bookImage = books.items[i].volumeInfo.imageLinks.smallThumbnail;

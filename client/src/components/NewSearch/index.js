@@ -27,11 +27,12 @@ function checkStatus(response) {
 }
 
 function parseJSON(response) {
-  const obj = response.json();
-  //let jsonStr = JSON.stringify(obj);
-  let arr = Object.keys(obj).map((key) => [key, obj[key]]);
-  console.log(obj);
-  return arr;
+  // 
+  return response =>
+      response.data.results.map(book => ({
+        name: '${book.items[0].volumeInfo.title}' 
+       
+      }))
 }
 
 const NewSearch = { search };

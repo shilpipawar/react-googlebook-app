@@ -1,7 +1,7 @@
 import React from "react";
 import Thumbnail from "../Thumbnail";
 import { Container, Row, Col } from "../Grid";
-import DelBtn from "../DeleteBtn";
+import DeleteBtn from "../DeleteBtn";
 import Button from "../Button"
 import "./style.css";
 
@@ -30,14 +30,18 @@ export function ListItem({ thumbnail = "https://placehold.it/300x300",
     <li className="list-group-item">
       <Container>
         <Row>
-          <Col size="xs-8 sm-9">
+          <Col size="xs-8 sm-6">
+
           </Col>
-          <Col size="xs-4 sm-2">
+          <Col size="xs-4 sm-4">
             <Btn>
               Save
               </Btn>
               <Btn>
               View
+              </Btn>
+              <Btn>
+              Delete
               </Btn>
           </Col>
         </Row>
