@@ -15,7 +15,7 @@ export function List({ children }) {
     </div>
   );
 }
-export function Btn(props) {
+export function ListBtn(props) {
   return (
     <button {...props} style={{ float: "right", marginBottom: 10 }} className="btn btn-success">
       {props.children}
@@ -30,22 +30,6 @@ export function ListItem({ thumbnail = "https://placehold.it/300x300",
   return (
     <li className="list-group-item">
       <Container>
-        <Row>
-          <Col size="xs-8 sm-6">
-
-          </Col>
-          <Col size="xs-4 sm-4">
-            <Btn>
-              Save
-              </Btn>
-              <Btn>
-              View
-              </Btn>
-              <Btn>
-              Delete
-              </Btn>
-          </Col>
-        </Row>
         <Row>
           <Col size="xs-4 sm-2">
             <Thumbnail src={thumbnail} />

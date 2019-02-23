@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import gAPI from "../utils/GoogleBookAPI";
 import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+import { List, ListItem, ListBtn } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
-import NewSearch from "../components/NewSearch";
 
 class Search extends Component {
   state = {
@@ -72,14 +71,32 @@ class Search extends Component {
         </Row>
         <Row>
           <List>
+            <Row>
+              <Col size="xs-8 sm-6">
+              </Col>
+              <Col size="xs-4 sm-4">
+                <ListBtn
+                  value={this.state.searchValue}
+                  onClick={this.handleBookSearch}
+                >
+                  Save
+              </ListBtn>
+                <ListBtn
+                  value={this.state.searchValue}
+                  onClick={this.handleBookSearch}
+                >
+                  View
+              </ListBtn>
+              </Col>
+            </Row>
             {
               this.state.result.totalItems ? (
                 <ListItem
                   title={this.state.result.items[0].volumeInfo.title}
                   auther={this.state.result.items[0].volumeInfo.authors}
-                  description = {this.state.result.items[0].volumeInfo.description}
-                  thumbnail = {this.state.result.items[0].volumeInfo.imageLinks.smallThumbnail}
-                  href = {this.state.result.items[0].volumeInfo.buyLink}
+                  description={this.state.result.items[0].volumeInfo.description}
+                  thumbnail={this.state.result.items[0].volumeInfo.imageLinks.smallThumbnail}
+                  href={this.state.result.items[0].volumeInfo.buyLink}
                 />
               ) : (
                   <h3>No Results to Display</h3>
@@ -88,14 +105,32 @@ class Search extends Component {
         </Row>
         <Row>
           <List>
+          <Row>
+              <Col size="xs-8 sm-6">
+              </Col>
+              <Col size="xs-4 sm-4">
+                <ListBtn
+                  value={this.state.searchValue}
+                  onClick={this.handleBookSearch}
+                >
+                  Save
+              </ListBtn>
+                <ListBtn
+                  value={this.state.searchValue}
+                  onClick={this.handleBookSearch}
+                >
+                  View
+              </ListBtn>
+              </Col>
+            </Row>
             {
               this.state.result.totalItems ? (
                 <ListItem
                   title={this.state.result.items[1].volumeInfo.title}
                   auther={this.state.result.items[1].volumeInfo.authors}
-                  description = {this.state.result.items[1].volumeInfo.description}
-                  thumbnail = {this.state.result.items[1].volumeInfo.imageLinks.smallThumbnail}
-                  href = {this.state.result.items[1].volumeInfo.buyLink}
+                  description={this.state.result.items[1].volumeInfo.description}
+                  thumbnail={this.state.result.items[1].volumeInfo.imageLinks.smallThumbnail}
+                  href={this.state.result.items[1].volumeInfo.buyLink}
                 />
               ) : (
                   <h3>No Results to Display</h3>
@@ -104,14 +139,32 @@ class Search extends Component {
         </Row>
         <Row>
           <List>
+          <Row>
+              <Col size="xs-8 sm-6">
+              </Col>
+              <Col size="xs-4 sm-4">
+                <ListBtn
+                  value={this.state.searchValue}
+                  onClick={this.handleBookSearch}
+                >
+                  Save
+              </ListBtn>
+                <ListBtn
+                  value={this.state.searchValue}
+                  onClick={this.handleBookSearch}
+                >
+                  View
+              </ListBtn>
+              </Col>
+            </Row>
             {
               this.state.result.totalItems ? (
                 <ListItem
                   title={this.state.result.items[2].volumeInfo.title}
                   auther={this.state.result.items[2].volumeInfo.authors}
-                  description = {this.state.result.items[2].volumeInfo.description}
-                  thumbnail = {this.state.result.items[2].volumeInfo.imageLinks.smallThumbnail}
-                  href = {this.state.result.items[2].volumeInfo.buyLink}
+                  description={this.state.result.items[2].volumeInfo.description}
+                  thumbnail={this.state.result.items[2].volumeInfo.imageLinks.smallThumbnail}
+                  href={this.state.result.items[2].volumeInfo.buyLink}
                 />
               ) : (
                   <h3>No Results to Display</h3>
