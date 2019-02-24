@@ -8,8 +8,8 @@ mongoose.connect(
 
 const googlebooks = new Schema({
   title: { type: String, required: true },
-  author: { type: String, required: true },
-  description: {type:String},
+  author: String,
+  description: { type: String, required: true },
   image:String,
   link: String,
   date: { type: Date, default: Date.now }

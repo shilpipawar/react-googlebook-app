@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import gAPI from "../utils/GoogleBookAPI";
+import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem, ListBtn } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
+import { Input, FormBtn } from "../components/Form";
 
 class Search extends Component {
   state = {
@@ -44,6 +45,30 @@ class Search extends Component {
     this.searchBook(this.state.searchValue);
   };
 
+  viewBook = link =>{
+    if(link.infoLink)
+    // window.location.href = link.infoLink;
+    window.open(
+      link.infoLink,
+      '_blank' // <- This is what makes it open in a new window.
+    )
+  };
+
+  saveBook = data => {
+    console.log(data);
+    if (data.title) {
+      API.saveBook({
+        title: data.title,
+        author: data.author,
+        description: data.description,
+        image: data.imageLinks.thumbnail,
+        link: data.previewLink
+      })
+        .then(res => console.log(res.status))
+        .catch(err => console.log(err));
+    }
+  };
+
   render() {
     return (
       <Container fluid>
@@ -71,24 +96,6 @@ class Search extends Component {
         </Row>
         <Row>
           <List>
-            <Row>
-              <Col size="xs-8 sm-6">
-              </Col>
-              <Col size="xs-4 sm-4">
-                <ListBtn
-                  value={this.state.searchValue}
-                  onClick={this.handleBookSearch}
-                >
-                  Save
-              </ListBtn>
-                <ListBtn
-                  value={this.state.searchValue}
-                  onClick={this.handleBookSearch}
-                >
-                  View
-              </ListBtn>
-              </Col>
-            </Row>
             {
               this.state.result.totalItems ? (
                 <ListItem
@@ -96,8 +103,23 @@ class Search extends Component {
                   auther={this.state.result.items[0].volumeInfo.authors}
                   description={this.state.result.items[0].volumeInfo.description}
                   thumbnail={this.state.result.items[0].volumeInfo.imageLinks.smallThumbnail}
-                  href={this.state.result.items[0].volumeInfo.buyLink}
-                />
+                  href={this.state.result.items[0].volumeInfo.previewLink}
+                >
+                  <Col size="xs-8 sm-6">
+                  </Col>
+                  <Col size="xs-4 sm-4">
+                    <ListBtn
+                      onClick={() => this.saveBook(this.state.result.items[0].volumeInfo)}
+                    >
+                      Save
+              </ListBtn>
+                    <ListBtn
+                     onClick={() => this.viewBook(this.state.result.items[0].volumeInfo)}
+                    >
+                      View
+              </ListBtn>
+                  </Col>
+                </ListItem>
               ) : (
                   <h3>No Results to Display</h3>
                 )}
@@ -105,7 +127,7 @@ class Search extends Component {
         </Row>
         <Row>
           <List>
-          <Row>
+            <Row>
               <Col size="xs-8 sm-6">
               </Col>
               <Col size="xs-4 sm-4">
@@ -130,7 +152,7 @@ class Search extends Component {
                   auther={this.state.result.items[1].volumeInfo.authors}
                   description={this.state.result.items[1].volumeInfo.description}
                   thumbnail={this.state.result.items[1].volumeInfo.imageLinks.smallThumbnail}
-                  href={this.state.result.items[1].volumeInfo.buyLink}
+                  href={this.state.result.items[1].volumeInfo.previewLink}
                 />
               ) : (
                   <h3>No Results to Display</h3>
@@ -139,7 +161,7 @@ class Search extends Component {
         </Row>
         <Row>
           <List>
-          <Row>
+            <Row>
               <Col size="xs-8 sm-6">
               </Col>
               <Col size="xs-4 sm-4">
@@ -164,7 +186,7 @@ class Search extends Component {
                   auther={this.state.result.items[2].volumeInfo.authors}
                   description={this.state.result.items[2].volumeInfo.description}
                   thumbnail={this.state.result.items[2].volumeInfo.imageLinks.smallThumbnail}
-                  href={this.state.result.items[2].volumeInfo.buyLink}
+                  href={this.state.result.items[2].volumeInfo.previewLink}
                 />
               ) : (
                   <h3>No Results to Display</h3>

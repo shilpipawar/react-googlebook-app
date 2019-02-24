@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+import { List, ListItem, ListBtn } from "../components/List";
 
 class Save extends Component {
   state = {
@@ -34,6 +34,10 @@ class Save extends Component {
       .catch(err => console.log(err));
   };
 
+  viewBook = link =>{
+    console.log("Enter View Book" + link);
+  }
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -54,15 +58,32 @@ class Save extends Component {
                   {this.state.books.map(book => {
                     return (
                       <ListItem
+                        key={book._id}
                         key={book.title}
                         title={book.title}
                         author={book.author}
                         href={book.link}
                         description={book.description}
                         thumbnail={book.image}
-                      />
+                      >
+                      <Col size="xs-8 sm-6">
+              </Col>
+              <Col size="xs-4 sm-4">
+                <ListBtn
+                  onClick={() => this.viewBook(book.link)}
+                >
+                  View
+              </ListBtn>
+                <ListBtn
+                  onClick={() => this.deleteBook(book._id)}
+                >
+                  Delete
+              </ListBtn>
+              </Col>
+                      </ListItem>
                     );
-                  })}
+                  })
+                  }
             </List>
           ) : (
               <h3>No Results to Display</h3>

@@ -1,8 +1,6 @@
 import React from "react";
 import Thumbnail from "../Thumbnail";
 import { Container, Row, Col } from "../Grid";
-import DeleteBtn from "../DeleteBtn";
-import Button from "../Button"
 import "./style.css";
 
 // This file exports both the List and ListItem components
@@ -26,10 +24,14 @@ export function ListItem({ thumbnail = "https://placehold.it/300x300",
   title,
   auther,
   description,
-  href }) {
+  href,
+children }) {
   return (
     <li className="list-group-item">
       <Container>
+        <Row>
+        {children}
+        </Row>
         <Row>
           <Col size="xs-4 sm-2">
             <Thumbnail src={thumbnail} />
