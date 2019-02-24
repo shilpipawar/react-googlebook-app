@@ -45,13 +45,14 @@ class Search extends Component {
     this.searchBook(this.state.searchValue);
   };
 
-  viewBook = link =>{
-    if(link.infoLink)
-    // window.location.href = link.infoLink;
-    window.open(
-      link.infoLink,
-      '_blank' // <- This is what makes it open in a new window.
-    )
+  viewBook = link => {
+    if (link.infoLink) {
+      // window.location.href = link.infoLink;
+      window.open(
+        link.infoLink,
+        '_blank'
+      )
+    }
   };
 
   saveBook = data => {
@@ -59,7 +60,7 @@ class Search extends Component {
     if (data.title) {
       API.saveBook({
         title: data.title,
-        author: data.author,
+        author: data.authors[0],
         description: data.description,
         image: data.imageLinks.thumbnail,
         link: data.previewLink
@@ -100,7 +101,7 @@ class Search extends Component {
               this.state.result.totalItems ? (
                 <ListItem
                   title={this.state.result.items[0].volumeInfo.title}
-                  auther={this.state.result.items[0].volumeInfo.authors}
+                  author={this.state.result.items[0].volumeInfo.authors}
                   description={this.state.result.items[0].volumeInfo.description}
                   thumbnail={this.state.result.items[0].volumeInfo.imageLinks.smallThumbnail}
                   href={this.state.result.items[0].volumeInfo.previewLink}
@@ -114,7 +115,7 @@ class Search extends Component {
                       Save
               </ListBtn>
                     <ListBtn
-                     onClick={() => this.viewBook(this.state.result.items[0].volumeInfo)}
+                      onClick={() => this.viewBook(this.state.result.items[0].volumeInfo)}
                     >
                       View
               </ListBtn>
@@ -127,24 +128,6 @@ class Search extends Component {
         </Row>
         <Row>
           <List>
-            <Row>
-              <Col size="xs-8 sm-6">
-              </Col>
-              <Col size="xs-4 sm-4">
-                <ListBtn
-                  value={this.state.searchValue}
-                  onClick={this.handleBookSearch}
-                >
-                  Save
-              </ListBtn>
-                <ListBtn
-                  value={this.state.searchValue}
-                  onClick={this.handleBookSearch}
-                >
-                  View
-              </ListBtn>
-              </Col>
-            </Row>
             {
               this.state.result.totalItems ? (
                 <ListItem
@@ -153,7 +136,22 @@ class Search extends Component {
                   description={this.state.result.items[1].volumeInfo.description}
                   thumbnail={this.state.result.items[1].volumeInfo.imageLinks.smallThumbnail}
                   href={this.state.result.items[1].volumeInfo.previewLink}
-                />
+                >
+                <Col size="xs-8 sm-6">
+                  </Col>
+                  <Col size="xs-4 sm-4">
+                    <ListBtn
+                      onClick={() => this.saveBook(this.state.result.items[1].volumeInfo)}
+                    >
+                      Save
+              </ListBtn>
+                    <ListBtn
+                      onClick={() => this.viewBook(this.state.result.items[1].volumeInfo)}
+                    >
+                      View
+              </ListBtn>
+                  </Col>
+                </ListItem>
               ) : (
                   <h3>No Results to Display</h3>
                 )}
@@ -161,24 +159,6 @@ class Search extends Component {
         </Row>
         <Row>
           <List>
-            <Row>
-              <Col size="xs-8 sm-6">
-              </Col>
-              <Col size="xs-4 sm-4">
-                <ListBtn
-                  value={this.state.searchValue}
-                  onClick={this.handleBookSearch}
-                >
-                  Save
-              </ListBtn>
-                <ListBtn
-                  value={this.state.searchValue}
-                  onClick={this.handleBookSearch}
-                >
-                  View
-              </ListBtn>
-              </Col>
-            </Row>
             {
               this.state.result.totalItems ? (
                 <ListItem
@@ -187,7 +167,21 @@ class Search extends Component {
                   description={this.state.result.items[2].volumeInfo.description}
                   thumbnail={this.state.result.items[2].volumeInfo.imageLinks.smallThumbnail}
                   href={this.state.result.items[2].volumeInfo.previewLink}
-                />
+                ><Col size="xs-8 sm-6">
+                </Col>
+                <Col size="xs-4 sm-4">
+                  <ListBtn
+                    onClick={() => this.saveBook(this.state.result.items[2].volumeInfo)}
+                  >
+                    Save
+            </ListBtn>
+                  <ListBtn
+                    onClick={() => this.viewBook(this.state.result.items[2].volumeInfo)}
+                  >
+                    View
+            </ListBtn>
+                </Col>
+              </ListItem>
               ) : (
                   <h3>No Results to Display</h3>
                 )}

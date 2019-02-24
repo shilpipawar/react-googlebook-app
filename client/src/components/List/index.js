@@ -22,7 +22,7 @@ export function ListBtn(props) {
 }
 export function ListItem({ thumbnail = "https://placehold.it/300x300",
   title,
-  auther,
+  author,
   description,
   href,
 children }) {
@@ -38,7 +38,7 @@ children }) {
           </Col>
           <Col size="xs-8 sm-9">
             <h3>{title}</h3>
-            <h3>Auther:{auther}</h3>
+            <h3>Author:{author}</h3>
             <p>description: {description}</p>
             <a rel="noreferrer noopener" target="_blank" href={href}>
               Go to Book Link!

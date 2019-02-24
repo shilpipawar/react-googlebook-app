@@ -34,9 +34,15 @@ class Save extends Component {
       .catch(err => console.log(err));
   };
 
-  viewBook = link =>{
-    console.log("Enter View Book" + link);
-  }
+  viewBook = link => {
+    if (link) {
+      // window.location.href = link.infoLink;
+      window.open(
+        link,
+        '_blank'
+      )
+    }
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -55,35 +61,34 @@ class Save extends Component {
         <Row>
           {this.state.books.length ? (
             <List>
-                  {this.state.books.map(book => {
-                    return (
-                      <ListItem
-                        key={book._id}
-                        key={book.title}
-                        title={book.title}
-                        author={book.author}
-                        href={book.link}
-                        description={book.description}
-                        thumbnail={book.image}
+              {this.state.books.map(book => {
+                return (
+                  <ListItem
+                    key={book._id}
+                    title={book.title}
+                    author={book.author}
+                    href={book.link}
+                    description={book.description}
+                    thumbnail={book.image}
+                  >
+                    <Col size="xs-8 sm-6">
+                    </Col>
+                    <Col size="xs-4 sm-4">
+                      <ListBtn
+                        onClick={() => this.viewBook(book.link)}
                       >
-                      <Col size="xs-8 sm-6">
-              </Col>
-              <Col size="xs-4 sm-4">
-                <ListBtn
-                  onClick={() => this.viewBook(book.link)}
-                >
-                  View
+                        View
               </ListBtn>
-                <ListBtn
-                  onClick={() => this.deleteBook(book._id)}
-                >
-                  Delete
+                      <ListBtn
+                        onClick={() => this.deleteBook(book._id)}
+                      >
+                        Delete
               </ListBtn>
-              </Col>
-                      </ListItem>
-                    );
-                  })
-                  }
+                    </Col>
+                  </ListItem>
+                );
+              })
+              }
             </List>
           ) : (
               <h3>No Results to Display</h3>
