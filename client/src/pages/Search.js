@@ -132,7 +132,7 @@ class Search extends Component {
               this.state.result.totalItems ? (
                 <ListItem
                   title={this.state.result.items[1].volumeInfo.title}
-                  auther={this.state.result.items[1].volumeInfo.authors}
+                  author={this.state.result.items[1].volumeInfo.authors}
                   description={this.state.result.items[1].volumeInfo.description}
                   thumbnail={this.state.result.items[1].volumeInfo.imageLinks.smallThumbnail}
                   href={this.state.result.items[1].volumeInfo.previewLink}
@@ -163,7 +163,7 @@ class Search extends Component {
               this.state.result.totalItems ? (
                 <ListItem
                   title={this.state.result.items[2].volumeInfo.title}
-                  auther={this.state.result.items[2].volumeInfo.authors}
+                  author={this.state.result.items[2].volumeInfo.authors}
                   description={this.state.result.items[2].volumeInfo.description}
                   thumbnail={this.state.result.items[2].volumeInfo.imageLinks.smallThumbnail}
                   href={this.state.result.items[2].volumeInfo.previewLink}
